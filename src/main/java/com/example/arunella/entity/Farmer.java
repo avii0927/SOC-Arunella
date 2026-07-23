@@ -1,0 +1,36 @@
+package com.example.arunella.entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+
+@Data
+@Entity
+@Table(name = "farmer")
+@AllArgsConstructor
+@NoArgsConstructor
+public class Farmer {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userId;
+
+    @ManyToOne
+    @JoinColumn(name = "admin_id")
+    private Admin admin;
+
+    private String role;
+    private String name;
+    private String email;
+    private String password;
+    private String nic;
+    private String contactNo;
+    private String district;
+    private BigDecimal rating;
+    private String location;
+    private BigDecimal wallet;
+    private String bankAccountNo;
+}
