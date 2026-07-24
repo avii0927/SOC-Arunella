@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html class="light" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Management | Arunella Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "earth-deep": "#1B3318",
+                    "primary-container": "#2d5a27",
+                    "on-surface-variant": "#42493e",
+                    "surface-bright": "#f9f9f9",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "inverse-surface": "#2f3131",
+                    "surface-white": "#FFFFFF",
+                    "background": "#f9f9f9",
+                    "tertiary-container": "#505050",
+                    "tertiary-fixed": "#e4e2e2",
+                    "outline": "#72796e",
+                    "secondary-fixed-dim": "#ffb77d",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#dadada",
+                    "surface-container-highest": "#e2e2e2",
+                    "inverse-on-surface": "#f1f1f1",
+                    "on-background": "#1a1c1c",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#fc9430",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#914d00",
+                    "on-primary": "#ffffff",
+                    "surface-container-low": "#f3f3f3",
+                    "surface-container": "#eeeeee",
+                    "admin-gray": "#434343",
+                    "surface-variant": "#e2e2e2",
+                    "on-primary-container": "#9dd090",
+                    "surface": "#f9f9f9",
+                    "border-subtle": "#D1D1D1",
+                    "inverse-primary": "#a1d494",
+                    "primary": "#154212",
+                    "primary-fixed-dim": "#a1d494",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#bcf0ae",
+                    "on-secondary-fixed": "#2f1500",
+                    "on-secondary-fixed-variant": "#6e3900",
+                    "on-primary-fixed": "#002201",
+                    "tertiary": "#393939",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#23501e",
+                    "on-tertiary-container": "#c4c2c2",
+                    "on-secondary-container": "#663500",
+                    "surface-tint": "#3b6934",
+                    "surface-container-high": "#e8e8e8",
+                    "secondary-fixed": "#ffdcc3",
+                    "outline-variant": "#c2c9bb",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "on-surface": "#1a1c1c",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "margin-mobile": "16px",
+                    "margin-tablet": "24px",
+                    "unit": "4px",
+                    "margin-desktop": "32px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "display": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "headline-sm": ["Hanken Grotesk"],
+                    "body-sm": ["Inter"],
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "body-md": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "display": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #F3F3F3;
+            color: #1a1c1c;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #D1D1D1; border-radius: 10px; }
+    </style>
+</head>
+<body class="font-body-md text-body-md">
+<!-- SideNavBar (Shared Component) -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-white dark:bg-admin-gray border-r border-border-subtle dark:border-on-surface-variant flex flex-col py-margin-desktop z-50">
+<div class="px-8 mb-10">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Arunella Admin</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1 uppercase tracking-wider">Supply Chain Control</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-8 py-3 text-on-surface-variant dark:text-tertiary-fixed-dim hover:bg-surface-container-low transition-colors duration-200" th:href="@{/}">
+<span class="material-symbols-outlined mr-4">dashboard</span>
+<span class="font-label-lg text-label-lg">System Overview</span>
+</a>
+<a class="flex items-center px-8 py-3 text-primary dark:text-primary-fixed font-bold border-r-4 border-primary bg-surface-container-low transition-colors duration-200" th:href="@{/users}">
+<span class="material-symbols-outlined mr-4">group</span>
+<span class="font-label-lg text-label-lg">User Management</span>
+</a>
+<a class="flex items-center px-8 py-3 text-on-surface-variant dark:text-tertiary-fixed-dim hover:bg-surface-container-low transition-colors duration-200" th:href="@{/crops}">
+<span class="material-symbols-outlined mr-4">precision_manufacturing</span>
+<span class="font-label-lg text-label-lg">Product Monitoring</span>
+</a>
+<a class="flex items-center px-8 py-3 text-on-surface-variant dark:text-tertiary-fixed-dim hover:bg-surface-container-low transition-colors duration-200" th:href="@{/deliveries}">
+<span class="material-symbols-outlined mr-4">local_shipping</span>
+<span class="font-label-lg text-label-lg">Delivery Tracking</span>
+</a>
+</nav>
+<div class="mt-auto px-8 space-y-1 border-t border-border-subtle pt-6">
+<a class="flex items-center py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mr-4">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+<a class="flex items-center py-2 text-on-surface-variant hover:text-error transition-colors" href="#">
+<span class="material-symbols-outlined mr-4">logout</span>
+<span class="font-label-lg text-label-lg">Logout</span>
+</a>
+</div>
+</aside>
+
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 bg-surface-white border-b border-border-subtle flex justify-between items-center px-margin-desktop z-40">
+<div class="flex items-center bg-surface-container-low px-4 py-2 rounded-lg border border-border-subtle w-96">
+<span class="material-symbols-outlined text-on-surface-variant mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-body-md" placeholder="Search Users (ID, Name, or District)..." type="text"/>
+</div>
+<div class="flex items-center space-x-6">
+<button class="text-on-surface-variant hover:text-primary transition-all duration-200 flex items-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-all duration-200 flex items-center">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="h-8 w-[1px] bg-border-subtle"></div>
+<span class="font-label-lg text-label-lg text-primary cursor-pointer hover:underline">Admin Panel</span>
+<div class="flex items-center space-x-3">
+<div class="text-right">
+<p class="font-label-lg text-label-lg">John S.</p>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter leading-none">Senior Admin</p>
+</div>
+<img class="w-10 h-10 rounded-full border-2 border-primary object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg0n2cjjV3e8hATXf33YR0PZ2-TTlv9uBr7KDJS7nWJZzbwFjVYQwRURPlYodlYgQ15p5-_yc00oiUP12cWOO62xkmSSkD1UmT34dGbo4FgnnRGq5wPJUuwuOwiZjpbVSQfT5P9zd617sVTfq_VNtVrz1mDVgT46n94LZF5TiXFIkS2jtLpWwx38XHfRF8VDM8F9ImwDxDf4DcTh74YzJosKZ96AFwV7ABP1bGeElnXmdQ7maFYX0Z"/>
+</div>
+</div>
+</header>
+
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-16 min-h-screen">
+<div class="p-margin-desktop max-w-[1440px] mx-auto space-y-8">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary">User Management</h2>
+<p class="text-on-surface-variant font-body-md mt-1">Audit and manage activity for farmers, buyers, and transporters within the Arunella ecosystem.</p>
+</div>
+<div class="flex gap-4">
+<button class="bg-surface-white border border-primary text-primary px-4 py-2 rounded-lg font-label-lg flex items-center hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined mr-2">download</span> Export CSV
+</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-lg flex items-center hover:bg-earth-deep transition-colors">
+<span class="material-symbols-outlined mr-2">person_add</span> Register New User
+</button>
+</div>
+</div>
+
+<!-- Dashboard Style KPI Row -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="bg-surface-white border border-border-subtle p-6 rounded-lg">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase mb-2">Total Users</p>
+<h3 class="text-display font-display text-primary" th:text="${totalUsersCount}">1,284</h3>
+</div>
+<div class="text-primary-container bg-primary-fixed p-2 rounded-full">
+<span class="material-symbols-outlined">groups</span>
+</div>
+</div>
+<div class="mt-4 flex items-center text-primary font-label-sm">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span> +12% this month
+</div>
+</div>
+<div class="bg-surface-white border border-border-subtle p-6 rounded-lg">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase mb-2">Farmers</p>
+<h3 class="text-display font-display text-primary" th:text="${#lists.size(farmers)}">842</h3>
+</div>
+<div class="text-secondary bg-secondary-fixed p-2 rounded-full">
+<span class="material-symbols-outlined">agriculture</span>
+</div>
+</div>
+<p class="mt-4 text-on-surface-variant font-label-sm">Central & North Districts</p>
+</div>
+<div class="bg-surface-white border border-border-subtle p-6 rounded-lg">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase mb-2">Buyers</p>
+<h3 class="text-display font-display text-primary" th:text="${#lists.size(buyers)}">156</h3>
+</div>
+<div class="text-tertiary bg-tertiary-fixed p-2 rounded-full">
+<span class="material-symbols-outlined">shopping_cart</span>
+</div>
+</div>
+<p class="mt-4 text-on-surface-variant font-label-sm">High-volume corporate</p>
+</div>
+<div class="bg-surface-white border border-border-subtle p-6 rounded-lg">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase mb-2">Transporters</p>
+<h3 class="text-display font-display text-primary" th:text="${#lists.size(transporters)}">286</h3>
+</div>
+<div class="text-secondary bg-secondary-fixed p-2 rounded-full">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+</div>
+<p class="mt-4 text-on-surface-variant font-label-sm">Active Logistics Partners</p>
+</div>
+</div>
+
+<!-- Farmers Table -->
+<div class="bg-surface-white border border-border-subtle rounded-lg overflow-hidden">
+<div class="px-6 py-4 bg-surface-container-low border-b border-border-subtle flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm text-primary flex items-center">
+<span class="material-symbols-outlined mr-2">agriculture</span> Registered Farmers
+</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-y border-border-subtle">
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">User ID</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">Name</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">Email</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">NIC</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">District</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">Role</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<tr th:each="farmer : ${farmers}" class="hover:bg-surface-container-lowest transition-colors group">
+<td class="p-4 font-label-lg" th:text="${'#F-' + farmer.userId}">#F-9021</td>
+<td class="p-4">
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-primary-fixed-dim flex items-center justify-center text-primary font-bold mr-3" th:text="${farmer.name != null ? farmer.name.substring(0, 1) : 'F'}">SK</div>
+<span class="font-body-md font-semibold" th:text="${farmer.name}">Sunil Karunaratne</span>
+</div>
+</td>
+<td class="p-4" th:text="${farmer.email}">farmer@arunella.lk</td>
+<td class="p-4" th:text="${farmer.nic}">198512345678</td>
+<td class="p-4" th:text="${farmer.district != null ? farmer.district : 'Anuradhapura'}">Anuradhapura</td>
+<td class="p-4">
+<span class="bg-primary-fixed text-primary px-3 py-1 rounded-full text-label-sm">Farmer</span>
+</td>
+<td class="p-4 text-right">
+<div class="flex justify-end gap-2 opacity-40 group-hover:opacity-100 transition-opacity">
+<button class="bg-surface-container text-primary p-2 rounded hover:bg-primary hover:text-on-primary transition-all"><span class="material-symbols-outlined text-sm">visibility</span></button>
+<button class="bg-surface-container text-error p-2 rounded hover:bg-error hover:text-on-error transition-all"><span class="material-symbols-outlined text-sm">block</span></button>
+</div>
+</td>
+</tr>
+<tr th:if="${#lists.isEmpty(farmers)}">
+<td class="p-4 font-label-lg">#F-9021</td>
+<td class="p-4"><div class="flex items-center"><div class="w-8 h-8 rounded-full bg-primary-fixed-dim flex items-center justify-center text-primary font-bold mr-3">SK</div><span class="font-body-md font-semibold">Sunil Karunaratne</span></div></td>
+<td class="p-4">sunil@arunella.lk</td>
+<td class="p-4">198512345678</td>
+<td class="p-4">Anuradhapura</td>
+<td class="p-4"><span class="bg-primary-fixed text-primary px-3 py-1 rounded-full text-label-sm">Farmer</span></td>
+<td class="p-4 text-right"><div class="flex justify-end gap-2"><button class="bg-surface-container text-primary p-2 rounded"><span class="material-symbols-outlined text-sm">visibility</span></button></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- Buyers Table -->
+<div class="bg-surface-white border border-border-subtle rounded-lg overflow-hidden">
+<div class="px-6 py-4 bg-surface-container-low border-b border-border-subtle flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm text-secondary flex items-center">
+<span class="material-symbols-outlined mr-2">shopping_cart</span> Registered Buyers
+</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-y border-border-subtle">
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">User ID</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">Name</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">Email</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">Business Reg No</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">Market Location</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">Role</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<tr th:each="buyer : ${buyers}" class="hover:bg-surface-container-lowest transition-colors group">
+<td class="p-4 font-label-lg" th:text="${'#B-' + buyer.userId}">#B-4412</td>
+<td class="p-4">
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary font-bold mr-3" th:text="${buyer.name != null ? buyer.name.substring(0, 1) : 'B'}">B</div>
+<span class="font-body-md font-semibold" th:text="${buyer.name}">Retail Lanka Ltd</span>
+</div>
+</td>
+<td class="p-4" th:text="${buyer.email}">buyer@arunella.lk</td>
+<td class="p-4" th:text="${buyer.businessRegNo}">PV12345</td>
+<td class="p-4" th:text="${buyer.marketLocation != null ? buyer.marketLocation : 'Colombo 03'}">Colombo 03</td>
+<td class="p-4">
+<span class="bg-tertiary-fixed text-tertiary px-3 py-1 rounded-full text-label-sm">Buyer</span>
+</td>
+<td class="p-4 text-right">
+<div class="flex justify-end gap-2 opacity-40 group-hover:opacity-100 transition-opacity">
+<button class="bg-surface-container text-primary p-2 rounded hover:bg-primary hover:text-on-primary transition-all"><span class="material-symbols-outlined text-sm">visibility</span></button>
+<button class="bg-surface-container text-error p-2 rounded hover:bg-error hover:text-on-error transition-all"><span class="material-symbols-outlined text-sm">block</span></button>
+</div>
+</td>
+</tr>
+<tr th:if="${#lists.isEmpty(buyers)}">
+<td class="p-4 font-label-lg">#B-4412</td>
+<td class="p-4"><div class="flex items-center"><div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary font-bold mr-3">RE</div><span class="font-body-md font-semibold">Retail Lanka Ltd</span></div></td>
+<td class="p-4">buyer@arunella.lk</td>
+<td class="p-4">PV-99120</td>
+<td class="p-4">Colombo 03</td>
+<td class="p-4"><span class="bg-tertiary-fixed text-tertiary px-3 py-1 rounded-full text-label-sm">Buyer</span></td>
+<td class="p-4 text-right"><div class="flex justify-end gap-2"><button class="bg-surface-container text-primary p-2 rounded"><span class="material-symbols-outlined text-sm">visibility</span></button></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- Transporters Table -->
+<div class="bg-surface-white border border-border-subtle rounded-lg overflow-hidden">
+<div class="px-6 py-4 bg-surface-container-low border-b border-border-subtle flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm text-tertiary flex items-center">
+<span class="material-symbols-outlined mr-2">local_shipping</span> Registered Transporters
+</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-y border-border-subtle">
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">User ID</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">Name</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">Email</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">Plate No</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">Max Capacity</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider">Role</th>
+<th class="p-4 font-label-sm text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<tr th:each="t : ${transporters}" class="hover:bg-surface-container-lowest transition-colors group">
+<td class="p-4 font-label-lg" th:text="${'#T-' + t.userId}">#T-2198</td>
+<td class="p-4">
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary font-bold mr-3" th:text="${t.name != null ? t.name.substring(0, 1) : 'T'}">T</div>
+<span class="font-body-md font-semibold" th:text="${t.name}">Dushmantha Perera</span>
+</div>
+</td>
+<td class="p-4" th:text="${t.email}">transporter@arunella.lk</td>
+<td class="p-4 font-mono" th:text="${t.vehiclePlateNo}">WP-4589</td>
+<td class="p-4" th:text="${t.maxCapacity != null ? t.maxCapacity + ' kg' : '1500 kg'}">1500 kg</td>
+<td class="p-4">
+<span class="bg-secondary-fixed text-secondary px-3 py-1 rounded-full text-label-sm">Transporter</span>
+</td>
+<td class="p-4 text-right">
+<div class="flex justify-end gap-2 opacity-40 group-hover:opacity-100 transition-opacity">
+<button class="bg-surface-container text-primary p-2 rounded hover:bg-primary hover:text-on-primary transition-all"><span class="material-symbols-outlined text-sm">visibility</span></button>
+<button class="bg-surface-container text-error p-2 rounded hover:bg-error hover:text-on-error transition-all"><span class="material-symbols-outlined text-sm">block</span></button>
+</div>
+</td>
+</tr>
+<tr th:if="${#lists.isEmpty(transporters)}">
+<td class="p-4 font-label-lg">#T-2198</td>
+<td class="p-4"><div class="flex items-center"><div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary font-bold mr-3">DM</div><span class="font-body-md font-semibold">Dushmantha Perera</span></div></td>
+<td class="p-4">transporter@arunella.lk</td>
+<td class="p-4 font-mono">WP-4589</td>
+<td class="p-4">1500 kg</td>
+<td class="p-4"><span class="bg-secondary-fixed text-secondary px-3 py-1 rounded-full text-label-sm">Transporter</span></td>
+<td class="p-4 text-right"><div class="flex justify-end gap-2"><button class="bg-surface-container text-primary p-2 rounded"><span class="material-symbols-outlined text-sm">visibility</span></button></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+</main>
+</body>
+</html>

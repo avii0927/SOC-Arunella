@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html class="light" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Product Monitoring | Arunella Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Inter:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #D1D1D1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #42493e; }
+        .bento-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .bento-card:hover { transform: translateY(-2px); }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "earth-deep": "#1B3318",
+                        "primary-container": "#2d5a27",
+                        "on-surface-variant": "#42493e",
+                        "surface-bright": "#f9f9f9",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#c8c6c6",
+                        "inverse-surface": "#2f3131",
+                        "surface-white": "#FFFFFF",
+                        "background": "#f9f9f9",
+                        "tertiary-container": "#505050",
+                        "tertiary-fixed": "#e4e2e2",
+                        "outline": "#72796e",
+                        "secondary-fixed-dim": "#ffb77d",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dadada",
+                        "surface-container-highest": "#e2e2e2",
+                        "inverse-on-surface": "#f1f1f1",
+                        "on-background": "#1a1c1c",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#fc9430",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#914d00",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f3f3f3",
+                        "surface-container": "#eeeeee",
+                        "admin-gray": "#434343",
+                        "surface-variant": "#e2e2e2",
+                        "on-primary-container": "#9dd090",
+                        "surface": "#f9f9f9",
+                        "border-subtle": "#D1D1D1",
+                        "inverse-primary": "#a1d494",
+                        "primary": "#154212",
+                        "primary-fixed-dim": "#a1d494",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#bcf0ae",
+                        "on-secondary-fixed": "#2f1500",
+                        "on-secondary-fixed-variant": "#6e3900",
+                        "on-primary-fixed": "#002201",
+                        "tertiary": "#393939",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#23501e",
+                        "on-tertiary-container": "#c4c2c2",
+                        "on-secondary-container": "#663500",
+                        "surface-tint": "#3b6934",
+                        "surface-container-high": "#e8e8e8",
+                        "secondary-fixed": "#ffdcc3",
+                        "outline-variant": "#c2c9bb",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "on-surface": "#1a1c1c",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "margin-tablet": "24px",
+                        "unit": "4px",
+                        "margin-desktop": "32px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "display": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "body-sm": ["Inter"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-white dark:bg-admin-gray border-r border-border-subtle dark:border-on-surface-variant flex flex-col py-margin-desktop z-50">
+<div class="px-6 mb-10">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Arunella Admin</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-1">Supply Chain Control</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="group flex items-center px-6 py-3 text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low transition-colors duration-200" th:href="@{/}">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+                System Overview
+            </a>
+<a class="group flex items-center px-6 py-3 text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low transition-colors duration-200" th:href="@{/users}">
+<span class="material-symbols-outlined mr-3">group</span>
+                User Management
+            </a>
+<a class="group flex items-center px-6 py-3 text-primary font-bold border-r-4 border-primary bg-surface-container-low transition-colors duration-200" th:href="@{/crops}">
+<span class="material-symbols-outlined mr-3" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
+                Product Monitoring
+            </a>
+<a class="group flex items-center px-6 py-3 text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low transition-colors duration-200" th:href="@{/deliveries}">
+<span class="material-symbols-outlined mr-3">local_shipping</span>
+                Delivery Tracking
+            </a>
+</nav>
+<div class="mt-auto px-6 space-y-1">
+<a class="group flex items-center py-3 text-on-surface-variant font-label-lg text-label-lg hover:text-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">settings</span> Settings
+            </a>
+<a class="group flex items-center py-3 text-on-surface-variant font-label-lg text-label-lg hover:text-error transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">logout</span> Logout
+            </a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 min-h-screen relative flex flex-col">
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 bg-surface-white border-b border-border-subtle z-40 px-margin-desktop flex justify-between items-center">
+<div class="flex items-center flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-border-subtle rounded-lg focus:outline-none focus:ring-1 focus:ring-primary text-body-md" placeholder="System-wide Search for crops..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-6">
+<button class="flex items-center text-on-surface-variant hover:text-primary transition-all duration-200">
+<span class="material-symbols-outlined mr-1">admin_panel_settings</span>
+<span class="font-label-lg">Admin Panel</span>
+</button>
+</div>
+</header>
+<!-- Content Area -->
+<div class="pt-24 px-margin-desktop pb-margin-desktop flex-1 overflow-y-auto custom-scrollbar">
+<!-- Page Header & Key Metrics (Bento Style) -->
+<div class="mb-8 grid grid-cols-12 gap-gutter">
+<div class="col-span-12 lg:col-span-8">
+<h2 class="font-headline-lg text-headline-lg text-earth-deep mb-2">Product Monitoring</h2>
+<p class="text-body-lg text-on-surface-variant max-w-2xl">Real-time oversight of current agricultural listings. Monitor stock levels, track expiry windows, and ensure supply chain stability across all regions.</p>
+</div>
+<div class="col-span-12 lg:col-span-4 flex items-end justify-end space-x-3">
+<button class="flex items-center px-4 py-2 bg-surface-white border border-border-subtle text-primary font-label-lg rounded hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined mr-2">download</span> Export CSV
+                    </button>
+<button class="flex items-center px-4 py-2 bg-primary text-on-primary font-label-lg rounded hover:bg-primary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined mr-2">add</span> Add Listing
+                    </button>
+</div>
+</div>
+<!-- KPI Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-8">
+<!-- KPI Widget 1 -->
+<div class="bg-surface-white border border-border-subtle p-4 bento-card">
+<p class="text-label-sm text-on-surface-variant uppercase mb-1">Total Active Listings</p>
+<div class="flex items-baseline justify-between">
+<h3 class="text-display font-display text-primary" th:text="${totalCropsCount}">1,284</h3>
+<span class="text-body-sm text-primary flex items-center">
+<span class="material-symbols-outlined text-[16px] mr-1">trending_up</span> +12%
+                        </span>
+</div>
+</div>
+<!-- KPI Widget 2 (Warning) -->
+<div class="bg-surface-white border border-border-subtle p-4 bento-card">
+<p class="text-label-sm text-on-surface-variant uppercase mb-1">Nearing Expiry</p>
+<div class="flex items-baseline justify-between">
+<h3 class="text-display font-display text-secondary">42</h3>
+<span class="text-body-sm text-secondary flex items-center">
+<span class="material-symbols-outlined text-[16px] mr-1">warning</span> Action Required
+                        </span>
+</div>
+</div>
+<!-- KPI Widget 3 -->
+<div class="bg-surface-white border border-border-subtle p-4 bento-card">
+<p class="text-label-sm text-on-surface-variant uppercase mb-1">Low Stock Alerts</p>
+<div class="flex items-baseline justify-between">
+<h3 class="text-display font-display text-error">18</h3>
+<span class="text-body-sm text-error flex items-center">
+<span class="material-symbols-outlined text-[16px] mr-1">priority_high</span> Critical
+                        </span>
+</div>
+</div>
+<!-- KPI Widget 4 -->
+<div class="bg-surface-white border border-border-subtle p-4 bento-card">
+<p class="text-label-sm text-on-surface-variant uppercase mb-1">Average Price/KG</p>
+<div class="flex items-baseline justify-between">
+<h3 class="text-display font-display text-earth-deep">LKR 240.00</h3>
+<span class="text-body-sm text-on-surface-variant flex items-center">
+<span class="material-symbols-outlined text-[16px] mr-1">image_arrow_up</span> Global Average
+                        </span>
+</div>
+</div>
+</div>
+
+<!-- Inventory Data Table Section -->
+<section class="bg-surface-white border border-border-subtle overflow-hidden">
+<div class="p-gutter border-b border-border-subtle flex flex-col md:flex-row md:items-center justify-between gap-4">
+<h3 class="font-headline-sm text-headline-sm text-earth-deep">Inventory Details</h3>
+<div class="flex items-center space-x-2">
+<div class="flex border border-border-subtle rounded overflow-hidden">
+<button class="px-3 py-1.5 bg-surface-container text-primary font-label-lg text-sm border-r border-border-subtle">All</button>
+<button class="px-3 py-1.5 bg-white text-on-surface-variant font-label-lg text-sm border-r border-border-subtle hover:bg-surface-container-low">Low Stock</button>
+<button class="px-3 py-1.5 bg-white text-on-surface-variant font-label-lg text-sm hover:bg-surface-container-low">Expiring Soon</button>
+</div>
+<button class="p-2 border border-border-subtle rounded hover:bg-surface-container-low text-on-surface-variant">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-black">
+<th class="px-gutter py-3 font-label-sm text-label-sm text-admin-gray uppercase tracking-wider">Product ID</th>
+<th class="px-gutter py-3 font-label-sm text-label-sm text-admin-gray uppercase tracking-wider">Product Name</th>
+<th class="px-gutter py-3 font-label-sm text-label-sm text-admin-gray uppercase tracking-wider">Stock Level</th>
+<th class="px-gutter py-3 font-label-sm text-label-sm text-admin-gray uppercase tracking-wider">Price per KG</th>
+<th class="px-gutter py-3 font-label-sm text-label-sm text-admin-gray uppercase tracking-wider">Min Price</th>
+<th class="px-gutter py-3 font-label-sm text-label-sm text-admin-gray uppercase tracking-wider">Expiry Date</th>
+<th class="px-gutter py-3 font-label-sm text-label-sm text-admin-gray uppercase tracking-wider">Status</th>
+<th class="px-gutter py-3 font-label-sm text-label-sm text-admin-gray uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<tr th:each="crop : ${crops}" class="hover:bg-surface-container-lowest transition-colors group">
+<td class="px-gutter py-4 font-mono font-bold text-primary" th:text="${'#PROD-' + crop.productId}">#PROD-1</td>
+<td class="px-gutter py-4 font-bold text-primary" th:text="${crop.productName}">Organic Cavendish Banana</td>
+<td class="px-gutter py-4 text-body-md" th:text="${crop.stock != null ? crop.stock + ' KG' : '1,200 KG'}">1,200 KG</td>
+<td class="px-gutter py-4 text-body-md font-semibold" th:text="${crop.pricePerKg != null ? 'LKR ' + crop.pricePerKg : 'LKR 240.00'}">LKR 240.00</td>
+<td class="px-gutter py-4 text-body-md" th:text="${crop.minPrice != null ? 'LKR ' + crop.minPrice : 'LKR 200.00'}">LKR 200.00</td>
+<td class="px-gutter py-4 text-body-md" th:text="${crop.expDate != null ? crop.expDate : 'Oct 24, 2024'}">Oct 24, 2024</td>
+<td class="px-gutter py-4">
+<span class="px-2 py-1 rounded-full bg-primary-container text-white text-[10px] font-bold uppercase tracking-wide" th:text="${crop.status != null ? crop.status : 'Stable'}">Stable</span>
+</td>
+<td class="px-gutter py-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr th:if="${#lists.isEmpty(crops)}">
+<td class="px-gutter py-4 font-mono font-bold text-primary">#PROD-101</td>
+<td class="px-gutter py-4 font-bold text-primary">Organic Cavendish Banana</td>
+<td class="px-gutter py-4 text-body-md">1,200 KG</td>
+<td class="px-gutter py-4 text-body-md">LKR 240.00</td>
+<td class="px-gutter py-4 text-body-md">LKR 200.00</td>
+<td class="px-gutter py-4 text-body-md">Oct 24, 2024</td>
+<td class="px-gutter py-4"><span class="px-2 py-1 rounded-full bg-primary-container text-white text-[10px] font-bold uppercase">Stable</span></td>
+<td class="px-gutter py-4 text-right"><button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_vert</span></button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- Bottom Information Cards (Asymmetric Layout) -->
+<div class="mt-8 grid grid-cols-12 gap-gutter">
+<div class="col-span-12 lg:col-span-7 bg-surface-white border border-border-subtle p-6">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-earth-deep">Stock Distribution</h4>
+<p class="text-body-sm text-on-surface-variant">Listing count by category and region.</p>
+</div>
+<span class="text-label-sm bg-surface-container px-2 py-1 rounded uppercase">Real-time</span>
+</div>
+<div class="h-48 flex items-end justify-between space-x-2">
+<div class="w-full bg-primary-container/20 relative group">
+<div class="absolute bottom-0 w-full bg-primary transition-all duration-500 h-2/3"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-on-surface-variant font-bold uppercase">Fruits</span>
+</div>
+<div class="w-full bg-primary-container/20 relative group">
+<div class="absolute bottom-0 w-full bg-primary transition-all duration-500 h-4/5"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-on-surface-variant font-bold uppercase">Grains</span>
+</div>
+<div class="w-full bg-primary-container/20 relative group">
+<div class="absolute bottom-0 w-full bg-primary transition-all duration-500 h-1/2"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-on-surface-variant font-bold uppercase">Roots</span>
+</div>
+<div class="w-full bg-primary-container/20 relative group">
+<div class="absolute bottom-0 w-full bg-primary transition-all duration-500 h-3/4"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-on-surface-variant font-bold uppercase">Spices</span>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-5 bg-surface-white border border-border-subtle p-6">
+<h4 class="font-headline-sm text-headline-sm text-earth-deep mb-2">Quality Control Alerts</h4>
+<p class="text-body-sm text-on-surface-variant mb-4">Automated inspection flags requiring admin authorization.</p>
+<div class="space-y-3">
+<div class="p-3 bg-error-container/30 border border-error/20 rounded flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-error">warning</span>
+<div>
+<p class="text-body-sm font-bold text-error">Price Surge Flagged</p>
+<p class="text-[11px] text-on-surface-variant">Listing #PROD-891 price exceeds district threshold.</p>
+</div>
+</div>
+</div>
+<div class="p-3 bg-secondary-container/20 border border-secondary/20 rounded flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-secondary">schedule</span>
+<div>
+<p class="text-body-sm font-bold text-secondary">Expiry Approaching</p>
+<p class="text-[11px] text-on-surface-variant">Batch #PROD-402 reaches exp date in 48 hours.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</main>
+</body>
+</html>
