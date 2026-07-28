@@ -1,333 +1,135 @@
 <!DOCTYPE html>
-<html class="light" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Delivery Tracking | Arunella Admin</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Inter:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "earth-deep": "#1B3318",
-                    "primary-container": "#2d5a27",
-                    "on-surface-variant": "#42493e",
-                    "surface-bright": "#f9f9f9",
-                    "on-secondary": "#ffffff",
-                    "tertiary-fixed-dim": "#c8c6c6",
-                    "inverse-surface": "#2f3131",
-                    "surface-white": "#FFFFFF",
-                    "background": "#f9f9f9",
-                    "tertiary-container": "#505050",
-                    "tertiary-fixed": "#e4e2e2",
-                    "outline": "#72796e",
-                    "secondary-fixed-dim": "#ffb77d",
-                    "error": "#ba1a1a",
-                    "surface-dim": "#dadada",
-                    "surface-container-highest": "#e2e2e2",
-                    "inverse-on-surface": "#f1f1f1",
-                    "on-background": "#1a1c1c",
-                    "on-error": "#ffffff",
-                    "secondary-container": "#fc9430",
-                    "on-tertiary-fixed-variant": "#474747",
-                    "surface-container-lowest": "#ffffff",
-                    "secondary": "#914d00",
-                    "on-primary": "#ffffff",
-                    "surface-container-low": "#f3f3f3",
-                    "surface-container": "#eeeeee",
-                    "admin-gray": "#434343",
-                    "surface-variant": "#e2e2e2",
-                    "on-primary-container": "#9dd090",
-                    "surface": "#f9f9f9",
-                    "border-subtle": "#D1D1D1",
-                    "inverse-primary": "#a1d494",
-                    "primary": "#154212",
-                    "primary-fixed-dim": "#a1d494",
-                    "on-error-container": "#93000a",
-                    "primary-fixed": "#bcf0ae",
-                    "on-secondary-fixed": "#2f1500",
-                    "on-secondary-fixed-variant": "#6e3900",
-                    "on-primary-fixed": "#002201",
-                    "tertiary": "#393939",
-                    "on-tertiary": "#ffffff",
-                    "on-primary-fixed-variant": "#23501e",
-                    "on-tertiary-container": "#c4c2c2",
-                    "on-secondary-container": "#663500",
-                    "surface-tint": "#3b6934",
-                    "surface-container-high": "#e8e8e8",
-                    "secondary-fixed": "#ffdcc3",
-                    "outline-variant": "#c2c9bb",
-                    "on-tertiary-fixed": "#1b1c1c",
-                    "on-surface": "#1a1c1c",
-                    "error-container": "#ffdad6"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
-            },
-            "spacing": {
-                    "gutter": "16px",
-                    "margin-mobile": "16px",
-                    "margin-tablet": "24px",
-                    "unit": "4px",
-                    "margin-desktop": "32px",
-                    "container-max": "1440px"
-            },
-            "fontFamily": {
-                    "display": ["Hanken Grotesk"],
-                    "headline-md": ["Hanken Grotesk"],
-                    "label-sm": ["Inter"],
-                    "headline-lg": ["Hanken Grotesk"],
-                    "headline-sm": ["Hanken Grotesk"],
-                    "body-sm": ["Inter"],
-                    "body-md": ["Inter"],
-                    "label-lg": ["Inter"]
-            }
-          },
-        },
-      }
-    </script>
-<style>
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #D1D1D1; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #154212; }
-    </style>
+<title>Deliveries | Arunella Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}.fill{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}</style>
+<script>
+    tailwind.config={theme:{extend:{colors:{"primary":"#0d631b","on-primary":"#ffffff","primary-container":"#2e7d32","on-primary-container":"#cbffc2","secondary":"#2a6b2c","secondary-container":"#acf4a4","on-secondary-container":"#307231","surface":"#f9f9f6","surface-container-lowest":"#ffffff","surface-container-low":"#f3f4f1","surface-container":"#eeeeeb","surface-container-high":"#e8e8e5","surface-container-highest":"#e2e3e0","on-surface":"#1a1c1a","on-surface-variant":"#40493d","outline-variant":"#bfcaba","error":"#D32F2F","error-container":"#ffdad6","on-error-container":"#93000a","leaf-green":"#4CAF50","earth-gray":"#F2F2F2","user-tan":"#FFF9C4","action-blue":"#E1F5FE","warning":"#ED6C02","surface-tint":"#1b6d24","background":"#f9f9f6","on-background":"#1a1c1a"},fontFamily:{sans:["Hanken Grotesk","sans-serif"]},spacing:{"gutter":"16px","xs":"4px","sm":"8px","md":"16px","lg":"24px","xl":"32px","margin-mobile":"16px","margin-desktop":"32px"},fontSize:{"label-md":["13px",{"lineHeight":"18px","fontWeight":"600"}],"label-sm":["11px",{"lineHeight":"16px","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px"}],"body-sm":["12px",{"lineHeight":"16px"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","fontWeight":"700"}]}}}}
+</script>
 </head>
-<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
-<!-- SideNavBar Anchor -->
-<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-white border-r border-border-subtle z-50 flex flex-col py-margin-desktop">
-<div class="px-6 mb-10">
-<h1 class="font-headline-md text-headline-md font-bold text-primary">Arunella Admin</h1>
-<p class="font-label-sm text-on-surface-variant opacity-70">Supply Chain Control</p>
-</div>
-<nav class="flex-grow space-y-1">
-<a class="flex items-center px-6 py-3 text-on-surface-variant hover:bg-surface-container-low font-label-lg text-label-lg" th:href="@{/}">
-<span class="material-symbols-outlined mr-3">dashboard</span> System Overview
-</a>
-<a class="flex items-center px-6 py-3 text-on-surface-variant hover:bg-surface-container-low font-label-lg text-label-lg" th:href="@{/users}">
-<span class="material-symbols-outlined mr-3">group</span> User Management
-</a>
-<a class="flex items-center px-6 py-3 text-on-surface-variant hover:bg-surface-container-low font-label-lg text-label-lg" th:href="@{/crops}">
-<span class="material-symbols-outlined mr-3">precision_manufacturing</span> Product Monitoring
-</a>
-<a class="flex items-center px-6 py-3 text-primary font-bold border-r-4 border-primary bg-surface-container-low font-label-lg text-label-lg" th:href="@{/deliveries}">
-<span class="material-symbols-outlined mr-3">local_shipping</span> Delivery Tracking
-</a>
+<body class="bg-background text-on-background font-sans min-h-screen flex">
+
+<!-- Sidebar -->
+<nav class="bg-surface-container-lowest fixed h-screen w-64 left-0 top-0 border-r border-outline-variant hidden md:flex flex-col p-4 z-20">
+    <div class="mb-8 px-4 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
+            <span class="material-symbols-outlined fill text-on-primary-container">eco</span>
+        </div>
+        <div>
+            <h1 class="font-bold text-xl text-primary">Arunella</h1>
+            <p class="text-label-sm text-on-surface-variant">Admin Console</p>
+        </div>
+    </div>
+    <ul class="flex flex-col gap-1 flex-1">
+        <li><a th:href="@{/}" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors text-label-md">
+            <span class="material-symbols-outlined">dashboard</span> Overview</a></li>
+        <li><a th:href="@{/users}" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors text-label-md">
+            <span class="material-symbols-outlined">group</span> Users</a></li>
+        <li><a th:href="@{/crops}" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors text-label-md">
+            <span class="material-symbols-outlined">potted_plant</span> Products</a></li>
+        <li><a th:href="@{/deliveries}" class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-full font-semibold text-label-md">
+            <span class="material-symbols-outlined fill">local_shipping</span> Deliveries</a></li>
+    </ul>
 </nav>
-<div class="mt-auto border-t border-border-subtle pt-6 space-y-1">
-<a class="flex items-center px-6 py-2 text-on-surface-variant hover:bg-surface-container-low font-label-lg text-label-lg" href="#">
-<span class="material-symbols-outlined mr-3">settings</span> Settings
-</a>
-<a class="flex items-center px-6 py-2 text-on-surface-variant hover:bg-surface-container-low font-label-lg text-label-lg" href="#">
-<span class="material-symbols-outlined mr-3">logout</span> Logout
-</a>
-</div>
-</aside>
 
-<!-- TopNavBar Anchor -->
-<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 bg-surface-white border-b border-border-subtle z-40 flex justify-between items-center px-margin-desktop ml-64">
-<div class="flex items-center flex-1 max-w-xl">
-<div class="relative w-full">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-border-subtle rounded-lg focus:ring-2 focus:ring-primary focus:outline-none text-body-md" placeholder="Search Delivery ID, Order ID..." type="text"/>
-</div>
-</div>
-<div class="flex items-center gap-6 ml-6">
-<span class="font-label-lg text-primary font-bold cursor-pointer hover:underline">Admin Panel</span>
-<div class="flex gap-4">
-<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">notifications</span></button>
-<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">help</span></button>
-</div>
-</div>
-</header>
+<!-- Main -->
+<main class="flex-1 ml-0 md:ml-64 flex flex-col min-h-screen">
+    <header class="bg-surface fixed top-0 right-0 w-full md:w-[calc(100%-16rem)] h-16 border-b border-outline-variant flex justify-between items-center px-lg z-10">
+        <h2 class="font-bold text-lg text-primary">Arunella Admin</h2>
+        <div class="flex items-center gap-3">
+            <button class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container-highest transition-colors">
+                <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container-highest transition-colors">
+                <span class="material-symbols-outlined">settings</span>
+            </button>
+        </div>
+    </header>
 
-<!-- Main Content Canvas -->
-<main class="ml-64 pt-24 pb-12 px-margin-desktop min-h-screen">
-<!-- Dashboard Header -->
-<div class="flex justify-between items-end mb-8">
-<div>
-<h2 class="font-display text-display text-primary">Delivery Tracking</h2>
-<p class="font-body-lg text-on-surface-variant mt-1">Real-time logistics monitoring and fleet management.</p>
-</div>
-<div class="flex gap-4">
-<button class="flex items-center gap-2 px-4 py-2 border border-border-subtle rounded-lg bg-surface-white text-label-lg hover:bg-surface-container">
-<span class="material-symbols-outlined text-sm">filter_list</span> Filter
-</button>
-<button class="flex items-center gap-2 px-6 py-2 bg-primary text-on-primary rounded-lg font-label-lg shadow-sm hover:bg-earth-deep">
-<span class="material-symbols-outlined">add</span> New Delivery
-</button>
-</div>
-</div>
+    <div class="pt-24 px-margin-mobile md:px-margin-desktop pb-margin-desktop w-full max-w-7xl mx-auto flex flex-col gap-6">
 
-<!-- KPI Widgets -->
-<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-<div class="bg-surface-white border border-border-subtle p-6 rounded-lg flex flex-col justify-between">
-<div>
-<span class="text-label-sm uppercase tracking-widest text-on-surface-variant">Active Shipments</span>
-<h3 class="text-display font-display text-primary mt-2" th:text="${activeShipmentsCount}">1,284</h3>
-</div>
-<div class="flex items-center text-primary-container font-label-sm mt-4">
-<span class="material-symbols-outlined text-sm mr-1">trending_up</span> +12% from yesterday
-</div>
-</div>
-<div class="bg-surface-white border border-border-subtle p-6 rounded-lg flex flex-col justify-between">
-<div>
-<span class="text-label-sm uppercase tracking-widest text-on-surface-variant">In Transit</span>
-<h3 class="text-display font-display text-secondary mt-2">842</h3>
-</div>
-<div class="flex items-center text-on-surface-variant font-label-sm mt-4">On schedule</div>
-</div>
-<div class="bg-surface-white border border-border-subtle p-6 rounded-lg flex flex-col justify-between">
-<div>
-<span class="text-label-sm uppercase tracking-widest text-on-surface-variant">Delivered Today</span>
-<h3 class="text-display font-display text-admin-gray mt-2">312</h3>
-</div>
-<div class="flex items-center text-primary-container font-label-sm mt-4">
-<span class="material-symbols-outlined text-sm mr-1">check_circle</span> 100% successful
-</div>
-</div>
-<div class="bg-surface-white border border-border-subtle p-6 rounded-lg flex flex-col justify-between">
-<div>
-<span class="text-label-sm uppercase tracking-widest text-on-surface-variant">Alerts</span>
-<h3 class="text-display font-display text-error mt-2">07</h3>
-</div>
-<div class="flex items-center text-error font-label-sm mt-4">
-<span class="material-symbols-outlined text-sm mr-1">warning</span> Needs immediate action
-</div>
-</div>
-</div>
+        <!-- Page Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-headline-lg text-on-surface">Delivery Tracking</h1>
+                <p class="text-body-md text-on-surface-variant mt-xs">Real-time logistics monitoring and fleet management.</p>
+            </div>
+            <button class="bg-primary text-on-primary text-label-md px-6 py-3 rounded-full hover:bg-surface-tint transition-colors flex items-center gap-2 shadow-sm">
+                <span class="material-symbols-outlined text-[18px]">add</span> New Delivery
+            </button>
+        </div>
 
-<!-- Main Tracking View (Bento Grid Style) -->
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-<!-- Map View Container -->
-<div class="lg:col-span-2 bg-surface-white border border-border-subtle rounded-lg overflow-hidden flex flex-col min-h-[500px]">
-<div class="px-6 py-4 border-b border-border-subtle flex justify-between items-center bg-surface-container-lowest">
-<h4 class="font-headline-sm text-headline-sm flex items-center gap-2">
-<span class="material-symbols-outlined text-primary">map</span> Live Fleet Map
-</h4>
-<div class="flex gap-2">
-<span class="flex items-center gap-1 text-label-sm bg-primary-fixed text-on-primary-fixed px-2 py-1 rounded">
-<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span> 1,284 Online
-</span>
-</div>
-</div>
-<div class="flex-grow relative bg-surface-container">
-<!-- Map Placeholder -->
-<div class="absolute inset-0 grayscale opacity-80">
-<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8fa-bAJr1Q3Xhr2Z6zfXVFz7QIuSBUaZ5PIqXpeHTz1eUk-BCgVBkojWkjO3rR3l4NncLPLcNSdEFNOwpmPG7PElDOBi8Vyft0M4ft3AklbwdWQp6F1GJcsn-NXdgAKd4karldgfdSJE50tVXP6SYNJQ79KJUQnGJioZOb-yZAYi2BYNXRM5iR_XZ-NtVKBw8cXihFYSGNHgcL_gYYa4QjH9dfLzzoOZKlQxtAJSChtUHjrSFSd7e"/>
-</div>
-<!-- Mock Vehicle Markers -->
-<div class="absolute top-1/4 left-1/3 p-2 bg-primary text-on-primary rounded-full shadow-lg cursor-pointer transform hover:scale-110 transition-transform">
-<span class="material-symbols-outlined text-sm">local_shipping</span>
-</div>
-<div class="absolute bottom-1/3 right-1/4 p-2 bg-secondary text-on-secondary rounded-full shadow-lg cursor-pointer transform hover:scale-110 transition-transform">
-<span class="material-symbols-outlined text-sm">local_shipping</span>
-</div>
-<!-- Floating Map Controls -->
-<div class="absolute bottom-6 right-6 flex flex-col gap-2">
-<button class="w-10 h-10 bg-surface-white border border-border-subtle rounded shadow-sm flex items-center justify-center hover:bg-surface-container-high"><span class="material-symbols-outlined">add</span></button>
-<button class="w-10 h-10 bg-surface-white border border-border-subtle rounded shadow-sm flex items-center justify-center hover:bg-surface-container-high"><span class="material-symbols-outlined">remove</span></button>
-</div>
-<!-- Selected Delivery Overlay Card -->
-<div class="absolute bottom-6 left-6 w-72 bg-surface-white p-4 rounded-lg shadow-xl border border-border-subtle">
-<div class="flex justify-between items-start mb-3">
-<div>
-<span class="text-label-sm text-on-surface-variant block">DEL-894102</span>
-<h5 class="font-headline-sm text-primary">In Transit</h5>
-</div>
-<span class="material-symbols-outlined text-secondary">info</span>
-</div>
-<div class="space-y-3">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-on-surface-variant text-sm">person</span>
-<span class="text-body-md">Robert Miller</span>
-</div>
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-on-surface-variant text-sm">location_on</span>
-<span class="text-body-sm text-on-surface-variant">ETA: 14:45 • Dambulla Hub</span>
-</div>
-</div>
-</div>
-</div>
-</div>
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-gutter">
+            <div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant">
+                <p class="text-label-sm text-on-surface-variant">Active Shipments</p>
+                <p class="text-headline-lg text-on-surface mt-1" th:text="${activeShipmentsCount}">0</p>
+                <p class="text-label-sm text-leaf-green mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">trending_up</span> +12%</p>
+            </div>
+            <div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant">
+                <p class="text-label-sm text-on-surface-variant">In Transit</p>
+                <p class="text-headline-lg text-on-surface mt-1">842</p>
+                <p class="text-label-sm text-on-surface-variant mt-1">On schedule</p>
+            </div>
+            <div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant">
+                <p class="text-label-sm text-on-surface-variant">Delivered Today</p>
+                <p class="text-headline-lg text-on-surface mt-1">312</p>
+                <p class="text-label-sm text-leaf-green mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">check_circle</span> 100% success</p>
+            </div>
+            <div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant">
+                <p class="text-label-sm text-on-surface-variant">Alerts</p>
+                <p class="text-headline-lg text-error mt-1">07</p>
+                <p class="text-label-sm text-error mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">warning</span> Immediate action</p>
+            </div>
+        </div>
 
-<!-- Delivery Log Container -->
-<div class="bg-surface-white border border-border-subtle rounded-lg flex flex-col">
-<div class="px-6 py-4 border-b border-border-subtle flex justify-between items-center bg-surface-container-lowest">
-<h4 class="font-headline-sm text-headline-sm">Recent Activity</h4>
-</div>
-<div class="flex-grow overflow-y-auto max-h-[500px] divide-y divide-border-subtle">
-<div class="p-6 hover:bg-surface-container-low transition-colors cursor-pointer">
-<div class="flex justify-between mb-2">
-<span class="font-label-lg text-primary">DEL-92203</span>
-<span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed text-[10px] font-bold rounded uppercase">In Transit</span>
-</div>
-<p class="text-body-md font-semibold">Rice Shipment #441</p>
-<p class="text-body-sm text-on-surface-variant">Transporter: Global Ag Logix</p>
-</div>
-<div class="p-6 hover:bg-surface-container-low transition-colors cursor-pointer">
-<div class="flex justify-between mb-2">
-<span class="font-label-lg text-primary">DEL-92198</span>
-<span class="px-2 py-0.5 bg-primary-fixed text-on-primary-fixed text-[10px] font-bold rounded uppercase">Delivered</span>
-</div>
-<p class="text-body-md font-semibold">Vegetable Supply Batch B</p>
-<p class="text-body-sm text-on-surface-variant">Transporter: Swift Roots Inc.</p>
-</div>
-</div>
-</div>
-</div>
+        <!-- Master Delivery Log -->
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+            <div class="p-lg border-b border-outline-variant">
+                <h3 class="text-headline-sm text-on-surface">Master Delivery Log</h3>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead><tr class="bg-earth-gray border-b border-outline-variant">
+                        <th class="py-3 px-4 text-label-md text-on-surface">Delivery ID</th>
+                        <th class="py-3 px-4 text-label-md text-on-surface">Order ID</th>
+                        <th class="py-3 px-4 text-label-md text-on-surface">Pickup</th>
+                        <th class="py-3 px-4 text-label-md text-on-surface">Destination</th>
+                        <th class="py-3 px-4 text-label-md text-on-surface">Status</th>
+                        <th class="py-3 px-4 text-label-md text-on-surface text-right">Actions</th>
+                    </tr></thead>
+                    <tbody class="text-body-md divide-y divide-outline-variant/50">
+                    <tr th:each="d : ${deliveries}" class="hover:bg-surface-container-low transition-colors group">
+                        <td class="py-3 px-4 font-mono text-xs text-primary" th:text="'#DLY-' + ${d.deliveryId}">#DLY-1</td>
+                        <td class="py-3 px-4 font-mono text-xs text-on-surface-variant" th:text="${d.order != null ? '#ORD-' + d.order.orderId : '-'}">#ORD-1</td>
+                        <td class="py-3 px-4" th:text="${d.pickupLocation != null ? d.pickupLocation : '-'}">Dambulla</td>
+                        <td class="py-3 px-4" th:text="${d.deliveryLocation != null ? d.deliveryLocation : '-'}">Colombo</td>
+                        <td class="py-3 px-4">
+                            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-user-tan text-on-surface text-label-sm"
+                                  th:text="${d.status != null ? d.status : 'In Transit'}">In Transit</span>
+                        </td>
+                        <td class="py-3 px-4 text-right">
+                            <div class="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="p-1.5 text-on-surface-variant hover:text-primary rounded-md hover:bg-surface-container-highest transition-colors">
+                                    <span class="material-symbols-outlined text-[20px]">more_vert</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(deliveries)}">
+                        <td colspan="6" class="py-10 text-center text-on-surface-variant text-body-md">No deliveries found.</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-<!-- Data Table: Master Delivery Log -->
-<div class="mt-8 bg-surface-white border border-border-subtle rounded-lg overflow-hidden">
-<div class="px-6 py-4 border-b border-border-subtle flex justify-between items-center bg-surface-container-lowest">
-<h4 class="font-headline-sm text-headline-sm">Master Delivery Log</h4>
-</div>
-<div class="overflow-x-auto">
-<table class="w-full border-collapse text-left">
-<thead class="bg-surface-container-low">
-<tr class="border-b border-black">
-<th class="px-6 py-3 font-label-sm text-admin-gray uppercase">Delivery ID</th>
-<th class="px-6 py-3 font-label-sm text-admin-gray uppercase">Order ID</th>
-<th class="px-6 py-3 font-label-sm text-admin-gray uppercase">Pickup</th>
-<th class="px-6 py-3 font-label-sm text-admin-gray uppercase">Destination</th>
-<th class="px-6 py-3 font-label-sm text-admin-gray uppercase">Status</th>
-<th class="px-6 py-3 text-right font-label-sm text-admin-gray uppercase">Actions</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-border-subtle">
-<tr th:each="d : ${deliveries}" class="hover:bg-surface-container-low transition-colors">
-<td class="px-6 py-4 font-label-lg text-primary" th:text="${'#DLY-' + d.deliveryId}">#DLY-771</td>
-<td class="px-6 py-4 text-body-md font-mono" th:text="${d.order != null ? '#ORD-' + d.order.orderId : '#ORD-4001'}">#ORD-4001</td>
-<td class="px-6 py-4 text-body-sm" th:text="${d.pickupLocation != null ? d.pickupLocation : 'Dambulla Economic Center'}">Dambulla</td>
-<td class="px-6 py-4 text-body-sm" th:text="${d.deliveryLocation != null ? d.deliveryLocation : 'Pettah Manning Market'}">Colombo</td>
-<td class="px-6 py-4">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-secondary-fixed text-on-secondary-fixed" th:text="${d.status != null ? d.status : 'In Transit'}">In Transit</span>
-</td>
-<td class="px-6 py-4 text-right">
-<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_vert</span></button>
-</td>
-</tr>
-<tr th:if="${#lists.isEmpty(deliveries)}">
-<td class="px-6 py-4 font-label-lg text-primary">#DLY-771</td>
-<td class="px-6 py-4 text-body-md font-mono">#ORD-4001</td>
-<td class="px-6 py-4 text-body-sm">Dambulla Economic Center</td>
-<td class="px-6 py-4 text-body-sm">Pettah Manning Market</td>
-<td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-secondary-fixed text-on-secondary-fixed">In Transit</span></td>
-<td class="px-6 py-4 text-right"><button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">more_vert</span></button></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-
-</div>
+    </div>
 </main>
 </body>
 </html>
