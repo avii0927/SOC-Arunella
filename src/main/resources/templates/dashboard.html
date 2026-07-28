@@ -1,408 +1,235 @@
 <!DOCTYPE html>
-<html class="light" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Arunella Admin Dashboard</title>
+<title>Overview | Arunella Admin</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Inter:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "earth-deep": "#1B3318",
-                    "primary-container": "#2d5a27",
-                    "on-surface-variant": "#42493e",
-                    "surface-bright": "#f9f9f9",
-                    "on-secondary": "#ffffff",
-                    "tertiary-fixed-dim": "#c8c6c6",
-                    "inverse-surface": "#2f3131",
-                    "surface-white": "#FFFFFF",
-                    "background": "#f9f9f9",
-                    "tertiary-container": "#505050",
-                    "tertiary-fixed": "#e4e2e2",
-                    "outline": "#72796e",
-                    "secondary-fixed-dim": "#ffb77d",
-                    "error": "#ba1a1a",
-                    "surface-dim": "#dadada",
-                    "surface-container-highest": "#e2e2e2",
-                    "inverse-on-surface": "#f1f1f1",
-                    "on-background": "#1a1c1c",
-                    "on-error": "#ffffff",
-                    "secondary-container": "#fc9430",
-                    "on-tertiary-fixed-variant": "#474747",
-                    "surface-container-lowest": "#ffffff",
-                    "secondary": "#914d00",
-                    "on-primary": "#ffffff",
-                    "surface-container-low": "#f3f3f3",
-                    "surface-container": "#eeeeee",
-                    "admin-gray": "#434343",
-                    "surface-variant": "#e2e2e2",
-                    "on-primary-container": "#9dd090",
-                    "surface": "#f9f9f9",
-                    "border-subtle": "#D1D1D1",
-                    "inverse-primary": "#a1d494",
-                    "primary": "#154212",
-                    "primary-fixed-dim": "#a1d494",
-                    "on-error-container": "#93000a",
-                    "primary-fixed": "#bcf0ae",
-                    "on-secondary-fixed": "#2f1500",
-                    "on-secondary-fixed-variant": "#6e3900",
-                    "on-primary-fixed": "#002201",
-                    "tertiary": "#393939",
-                    "on-tertiary": "#ffffff",
-                    "on-primary-fixed-variant": "#23501e",
-                    "on-tertiary-container": "#c4c2c2",
-                    "on-secondary-container": "#663500",
-                    "surface-tint": "#3b6934",
-                    "surface-container-high": "#e8e8e8",
-                    "secondary-fixed": "#ffdcc3",
-                    "outline-variant": "#c2c9bb",
-                    "on-tertiary-fixed": "#1b1c1c",
-                    "on-surface": "#1a1c1c",
-                    "error-container": "#ffdad6"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
-            },
-            "spacing": {
-                    "gutter": "16px",
-                    "margin-mobile": "16px",
-                    "margin-tablet": "24px",
-                    "unit": "4px",
-                    "margin-desktop": "32px",
-                    "container-max": "1440px"
-            },
-            "fontFamily": {
-                    "display": ["Hanken Grotesk"],
-                    "headline-md": ["Hanken Grotesk"],
-                    "label-sm": ["Inter"],
-                    "headline-lg": ["Hanken Grotesk"],
-                    "headline-sm": ["Hanken Grotesk"],
-                    "body-sm": ["Inter"],
-                    "headline-lg-mobile": ["Hanken Grotesk"],
-                    "body-md": ["Inter"],
-                    "label-lg": ["Inter"],
-                    "body-lg": ["Inter"]
-            },
-            "fontSize": {
-                    "display": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
-                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
-                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
-                    "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
-                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
-                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
-            }
-          },
-        },
-      }
-    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #d1d1d1;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #42493e;
-        }
-    </style>
-</head>
-<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
-<!-- SideNavBar Anchor -->
-<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-white dark:bg-admin-gray border-r border-border-subtle dark:border-on-surface-variant flex flex-col py-margin-desktop z-[60]">
-<div class="px-6 mb-10">
-<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Arunella Admin</h1>
-<p class="text-on-surface-variant font-label-lg text-label-lg mt-1">Supply Chain Control</p>
-</div>
-<nav class="flex-grow px-2 space-y-1">
-<a class="flex items-center px-4 py-3 font-label-lg text-label-lg transition-colors duration-200 text-primary dark:text-primary-fixed font-bold border-r-4 border-primary bg-surface-container-low dark:bg-tertiary-container" th:href="@{/}">
-<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
-                System Overview
-            </a>
-<a class="flex items-center px-4 py-3 font-label-lg text-label-lg transition-colors duration-200 text-on-surface-variant dark:text-tertiary-fixed-dim hover:bg-surface-container-low dark:hover:bg-tertiary-container" th:href="@{/users}">
-<span class="material-symbols-outlined mr-3" data-icon="group">group</span>
-                User Management
-            </a>
-<a class="flex items-center px-4 py-3 font-label-lg text-label-lg transition-colors duration-200 text-on-surface-variant dark:text-tertiary-fixed-dim hover:bg-surface-container-low dark:hover:bg-tertiary-container" th:href="@{/crops}">
-<span class="material-symbols-outlined mr-3" data-icon="precision_manufacturing">precision_manufacturing</span>
-                Product Monitoring
-            </a>
-<a class="flex items-center px-4 py-3 font-label-lg text-label-lg transition-colors duration-200 text-on-surface-variant dark:text-tertiary-fixed-dim hover:bg-surface-container-low dark:hover:bg-tertiary-container" th:href="@{/deliveries}">
-<span class="material-symbols-outlined mr-3" data-icon="local_shipping">local_shipping</span>
-                Delivery Tracking
-            </a>
-</nav>
-<div class="px-2 pt-4 border-t border-border-subtle dark:border-on-surface-variant">
-<a class="flex items-center px-4 py-3 font-label-lg text-label-lg transition-colors duration-200 text-on-surface-variant dark:text-tertiary-fixed-dim hover:bg-surface-container-low dark:hover:bg-tertiary-container" href="#">
-<span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
-                Settings
-            </a>
-<a class="flex items-center px-4 py-3 font-label-lg text-label-lg transition-colors duration-200 text-on-surface-variant dark:text-tertiary-fixed-dim hover:bg-surface-container-low dark:hover:bg-tertiary-container" href="#">
-<span class="material-symbols-outlined mr-3" data-icon="logout">logout</span>
-                Logout
-            </a>
-</div>
-</aside>
-<!-- TopNavBar Anchor -->
-<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 bg-surface-white dark:bg-admin-gray border-b border-border-subtle dark:border-on-surface-variant z-50 flex justify-between items-center px-margin-desktop">
-<div class="flex items-center flex-1">
-<div class="relative w-full max-w-md">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
-<input class="w-full bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 text-label-lg focus:ring-2 focus:ring-primary" placeholder="Search system logs or users..." type="text"/>
-</div>
-</div>
-<div class="flex items-center space-x-6 ml-4">
-<button class="flex items-center text-primary font-bold text-label-lg hover:underline">
-                Admin Panel
-            </button>
-<div class="flex items-center space-x-3 border-l border-border-subtle pl-6">
-<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer" data-icon="notifications">notifications</span>
-<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer" data-icon="help">help</span>
-<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high border border-border-subtle">
-<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0udP8SILeQ1E6UmkjZm-03KiKQVSsY4mfx04POUb8rnJ5yjELMwEDiGMIDtxvJqnDhHug3jcKb2XT3fHHzZ8Zz5ZoqctgvTOBGqrgujDz1ursHHwwEk-oQZEq3RBZMxg-EaFLDCH8odezqpZJIylf6rer0q3mKHuo-FLbhlkwhkSqk8iAE0CI6sUCVMZGElsFmLz3k5jIah5fBmyH7bSuPAgKnVBhzd-2f9w1xARNSr4biqWTfz4E"/>
-</div>
-</div>
-</div>
-</header>
-<!-- Main Content Canvas -->
-<main class="ml-64 pt-24 px-margin-desktop pb-margin-desktop min-h-screen">
-<div class="max-w-container-max mx-auto">
-<!-- Dashboard Header -->
-<div class="mb-8">
-<h2 class="font-headline-lg text-headline-lg text-primary">System Overview</h2>
-<p class="text-on-surface-variant font-body-lg">Real-time metrics from the agricultural supply network.</p>
-</div>
-<!-- KPI Bento Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-10">
-<!-- Total Farmers -->
-<div class="bg-surface-white border border-border-subtle p-6 rounded-lg transition-all duration-200 hover:border-primary">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-primary-container/10 rounded-lg">
-<span class="material-symbols-outlined text-primary" data-icon="group">group</span>
-</div>
-<span class="text-primary font-label-sm text-label-sm flex items-center">
-<span class="material-symbols-outlined text-[14px] mr-1" data-icon="trending_up">trending_up</span>
-                            +12.5%
-                        </span>
-</div>
-<p class="text-on-surface-variant font-label-lg text-label-lg">Total Farmers</p>
-<h3 class="text-headline-md font-display mt-1" th:text="${farmerCount}">14,282</h3>
-<div class="mt-4 h-1 w-full bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-primary w-[75%]"></div>
-</div>
-</div>
-<!-- Active Orders -->
-<div class="bg-surface-white border border-border-subtle p-6 rounded-lg transition-all duration-200 hover:border-primary">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-secondary-container/10 rounded-lg">
-<span class="material-symbols-outlined text-secondary" data-icon="shopping_cart">shopping_cart</span>
-</div>
-<span class="text-secondary font-label-sm text-label-sm flex items-center">
-<span class="material-symbols-outlined text-[14px] mr-1" data-icon="sync">sync</span>
-                            Active
-                        </span>
-</div>
-<p class="text-on-surface-variant font-label-lg text-label-lg">Active Orders</p>
-<h3 class="text-headline-md font-display mt-1" th:text="${orderCount}">1,402</h3>
-<div class="mt-4 h-1 w-full bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-secondary w-[45%]"></div>
-</div>
-</div>
-<!-- Pending Deliveries -->
-<div class="bg-surface-white border border-border-subtle p-6 rounded-lg transition-all duration-200 hover:border-primary">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-tertiary-container/10 rounded-lg">
-<span class="material-symbols-outlined text-tertiary" data-icon="local_shipping">local_shipping</span>
-</div>
-<span class="text-on-surface-variant font-label-sm text-label-sm">In Transit</span>
-</div>
-<p class="text-on-surface-variant font-label-lg text-label-lg">Pending Deliveries</p>
-<h3 class="text-headline-md font-display mt-1" th:text="${deliveryCount}">389</h3>
-<div class="mt-4 h-1 w-full bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-tertiary w-[60%]"></div>
-</div>
-</div>
-<!-- Crop Listings -->
-<div class="bg-surface-white border border-border-subtle p-6 rounded-lg transition-all duration-200 border-error/30 hover:border-error">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-primary-container/10 rounded-lg">
-<span class="material-symbols-outlined text-primary" data-icon="precision_manufacturing">precision_manufacturing</span>
-</div>
-<span class="text-primary font-label-sm text-label-sm">Active</span>
-</div>
-<p class="text-on-surface-variant font-label-lg text-label-lg">Crop Listings</p>
-<h3 class="text-headline-md font-display mt-1" th:text="${cropCount}">1,284</h3>
-<div class="mt-4 h-1 w-full bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-primary w-[85%]"></div>
-</div>
-</div>
-</div>
-<!-- Lower Dashboard Section -->
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
-<!-- Summary Table Area -->
-<div class="lg:col-span-2 space-y-gutter">
-<div class="bg-surface-white border border-border-subtle rounded-lg overflow-hidden flex flex-col">
-<div class="px-6 py-4 border-b border-border-subtle flex justify-between items-center">
-<h4 class="font-headline-sm text-headline-sm text-on-surface">Latest Crop Listings</h4>
-<a th:href="@{/crops}" class="text-primary font-label-lg text-label-lg flex items-center hover:bg-primary-container/5 px-2 py-1 rounded">
-                                View All Listings <span class="material-symbols-outlined ml-1" data-icon="chevron_right">chevron_right</span>
-</a>
-</div>
-<div class="overflow-x-auto">
-<table class="w-full text-left border-collapse">
-<thead class="bg-surface-container-low">
-<tr>
-<th class="px-6 py-3 font-label-sm text-label-sm text-on-surface-variant border-b border-on-background">PRODUCT ID</th>
-<th class="px-6 py-3 font-label-sm text-label-sm text-on-surface-variant border-b border-on-background">CROP TYPE</th>
-<th class="px-6 py-3 font-label-sm text-label-sm text-on-surface-variant border-b border-on-background">QUANTITY</th>
-<th class="px-6 py-3 font-label-sm text-label-sm text-on-surface-variant border-b border-on-background">PRICING</th>
-<th class="px-6 py-3 font-label-sm text-label-sm text-on-surface-variant border-b border-on-background">STATUS</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-border-subtle">
-<tr th:each="crop : ${recentCrops}" class="hover:bg-surface-container-low transition-colors duration-150">
-<td class="px-6 py-4 font-body-md font-mono" th:text="${'#CROP-' + crop.productId}">#CROP-1</td>
-<td class="px-6 py-4">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-container/10 text-primary" th:text="${crop.productName}">Basmati Rice</span>
-</td>
-<td class="px-6 py-4 font-body-md" th:text="${crop.stock != null ? crop.stock + ' kg' : '500 kg'}">500 kg</td>
-<td class="px-6 py-4 font-label-lg" th:text="${crop.pricePerKg != null ? 'LKR ' + crop.pricePerKg : 'LKR 145,000'}">LKR 145,000</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 bg-primary/10 text-primary text-label-sm rounded border border-primary/20" th:text="${crop.status != null ? crop.status : 'Active'}">Active</span>
-</td>
-</tr>
-<tr th:if="${#lists.isEmpty(recentCrops)}">
-<td class="px-6 py-4 font-body-md">#CROP-101</td>
-<td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-container/10 text-primary">Basmati Rice</span></td>
-<td class="px-6 py-4 font-body-md">500 kg</td>
-<td class="px-6 py-4 font-label-lg">LKR 145,000</td>
-<td class="px-6 py-4"><span class="px-2 py-1 bg-primary/10 text-primary text-label-sm rounded border border-primary/20">Active</span></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<!-- Supply Chain Visualizer Card -->
-<div class="relative bg-earth-deep rounded-lg overflow-hidden h-64 border border-outline">
-<div class="relative z-10 p-8 h-full flex flex-col justify-end bg-gradient-to-t from-earth-deep to-transparent">
-<h4 class="text-white font-headline-md text-headline-md">Logistics Flow Visualization</h4>
-<p class="text-on-primary-container font-body-md max-w-lg mt-2">Live traffic and inventory movement across distribution centers.</p>
-<div class="mt-4 flex space-x-4">
-<div class="flex items-center text-primary-fixed text-label-sm">
-<span class="w-2 h-2 rounded-full bg-primary-fixed mr-2"></span> Distribution Hubs
-                                </div>
-<div class="flex items-center text-secondary-fixed text-label-sm">
-<span class="w-2 h-2 rounded-full bg-secondary-fixed mr-2"></span> In-Transit
-                                </div>
-</div>
-</div>
-</div>
-</div>
-<!-- Recent Activities Feed -->
-<div class="bg-surface-white border border-border-subtle rounded-lg flex flex-col h-full">
-<div class="px-6 py-4 border-b border-border-subtle">
-<h4 class="font-headline-sm text-headline-sm text-on-surface">Recent Activities</h4>
-</div>
-<div class="p-6 space-y-6 overflow-y-auto max-h-[600px] custom-scrollbar">
-<!-- Activity Item 1 -->
-<div class="flex gap-4">
-<div class="mt-1 flex flex-col items-center">
-<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-[20px]" data-icon="add_task">add_task</span>
-</div>
-<div class="w-px h-full bg-border-subtle mt-2"></div>
-</div>
-<div>
-<h5 class="font-label-lg text-label-lg">New listing approved</h5>
-<p class="text-body-sm text-on-surface-variant mt-1">System auto-validated 500kg of Basmati Rice from farmer #4829.</p>
-<span class="text-label-sm text-on-tertiary-fixed-variant mt-2 block">2 minutes ago</span>
-</div>
-</div>
-<!-- Activity Item 2 -->
-<div class="flex gap-4">
-<div class="mt-1 flex flex-col items-center">
-<div class="w-10 h-10 rounded-full bg-error/10 flex items-center justify-center text-error">
-<span class="material-symbols-outlined text-[20px]" data-icon="gpp_maybe">gpp_maybe</span>
-</div>
-<div class="w-px h-full bg-border-subtle mt-2"></div>
-</div>
-<div>
-<h5 class="font-label-lg text-label-lg text-error">High-Value Alert</h5>
-<p class="text-body-sm text-on-surface-variant mt-1">Transaction #9028 flagged for irregular pricing pattern audit.</p>
-<span class="text-label-sm text-on-tertiary-fixed-variant mt-2 block">14 minutes ago</span>
-</div>
-</div>
-<!-- Activity Item 3 -->
-<div class="flex gap-4">
-<div class="mt-1 flex flex-col items-center">
-<div class="w-10 h-10 rounded-full bg-tertiary-container/10 flex items-center justify-center text-tertiary">
-<span class="material-symbols-outlined text-[20px]" data-icon="local_shipping">local_shipping</span>
-</div>
-<div class="w-px h-full bg-border-subtle mt-2"></div>
-</div>
-<div>
-<h5 class="font-label-lg text-label-lg">Delivery Dispatched</h5>
-<p class="text-body-sm text-on-surface-variant mt-1">Order #6712 left Kurunegala hub for Colombo distribution.</p>
-<span class="text-label-sm text-on-tertiary-fixed-variant mt-2 block">45 minutes ago</span>
-</div>
-</div>
-<!-- Activity Item 4 -->
-<div class="flex gap-4">
-<div class="mt-1 flex flex-col items-center">
-<div class="w-10 h-10 rounded-full bg-secondary-container/10 flex items-center justify-center text-secondary">
-<span class="material-symbols-outlined text-[20px]" data-icon="person_add">person_add</span>
-</div>
-</div>
-<div>
-<h5 class="font-label-lg text-label-lg">New Farmer Registered</h5>
-<p class="text-body-sm text-on-surface-variant mt-1">Arjuna Ranatunga completed identity verification for organic certification.</p>
-<span class="text-label-sm text-on-tertiary-fixed-variant mt-2 block">1 hour ago</span>
-</div>
-</div>
-</div>
-<div class="mt-auto p-4 border-t border-border-subtle">
-<button class="w-full py-2 bg-surface-container text-on-surface font-label-lg text-label-lg rounded hover:bg-surface-container-high transition-colors">
-                            Generate Activity Report
-                        </button>
-</div>
-</div>
-</div>
-<!-- Footer Meta -->
-<footer class="mt-12 pt-6 border-t border-border-subtle flex justify-between text-on-surface-variant text-label-sm">
-<p>© 2024 Arunella Supply Chain Management. All system activities are logged.</p>
-<div class="flex space-x-4">
-<a class="hover:text-primary" href="#">System Health: 99.8%</a>
-<a class="hover:text-primary" href="#">Terms of Service</a>
-</div>
-</footer>
-</div>
-</main>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+</style>
 <script>
-        document.querySelectorAll('.flex.gap-4').forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                item.querySelector('.w-10')?.classList.add('scale-110');
-            });
-            item.addEventListener('mouseleave', () => {
-                item.querySelector('.w-10')?.classList.remove('scale-110');
-            });
-        });
-    </script>
+    tailwind.config = {
+        theme: { extend: {
+            colors: {
+                "primary":"#0d631b","on-primary":"#ffffff","primary-container":"#2e7d32","on-primary-container":"#cbffc2",
+                "secondary":"#2a6b2c","secondary-container":"#acf4a4","on-secondary-container":"#307231",
+                "surface":"#f9f9f6","surface-container-lowest":"#ffffff","surface-container-low":"#f3f4f1",
+                "surface-container":"#eeeeeb","surface-container-high":"#e8e8e5","surface-container-highest":"#e2e3e0",
+                "on-surface":"#1a1c1a","on-surface-variant":"#40493d","outline-variant":"#bfcaba",
+                "error":"#D32F2F","error-container":"#ffdad6","on-error-container":"#93000a",
+                "inverse-surface":"#2f312f","inverse-on-surface":"#f1f1ee",
+                "leaf-green":"#4CAF50","earth-gray":"#F2F2F2","user-tan":"#FFF9C4","action-blue":"#E1F5FE",
+                "warning":"#ED6C02","surface-tint":"#1b6d24","background":"#f9f9f6","on-background":"#1a1c1a",
+            },
+            fontFamily: { sans: ["Hanken Grotesk", "sans-serif"] },
+            spacing: { "gutter":"16px","xs":"4px","sm":"8px","md":"16px","lg":"24px","xl":"32px","margin-mobile":"16px","margin-desktop":"32px" },
+            fontSize: {
+                "label-md":["13px",{"lineHeight":"18px","fontWeight":"600"}],
+                "label-sm":["11px",{"lineHeight":"16px","fontWeight":"700"}],
+                "body-md":["14px",{"lineHeight":"20px"}],"body-sm":["12px",{"lineHeight":"16px"}],
+                "headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],
+                "headline-lg":["32px",{"lineHeight":"40px","fontWeight":"700"}],
+            }
+        }}
+    }
+</script>
+</head>
+<body class="bg-background text-on-background font-sans min-h-screen flex">
+
+<!-- Sidebar -->
+<nav class="bg-surface-container-lowest fixed h-screen w-64 left-0 top-0 border-r border-outline-variant hidden md:flex flex-col p-4 z-20">
+    <div class="mb-8 px-4 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
+            <span class="material-symbols-outlined fill text-on-primary-container">eco</span>
+        </div>
+        <div>
+            <h1 class="font-bold text-xl text-primary">Arunella</h1>
+            <p class="text-label-sm text-on-surface-variant">Admin Console</p>
+        </div>
+    </div>
+    <ul class="flex flex-col gap-1 flex-1">
+        <li><a th:href="@{/}" class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-full font-semibold text-label-md">
+            <span class="material-symbols-outlined fill">dashboard</span> Overview</a></li>
+        <li><a th:href="@{/users}" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors text-label-md">
+            <span class="material-symbols-outlined">group</span> Users</a></li>
+        <li><a th:href="@{/crops}" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors text-label-md">
+            <span class="material-symbols-outlined">potted_plant</span> Products</a></li>
+        <li><a th:href="@{/deliveries}" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors text-label-md">
+            <span class="material-symbols-outlined">local_shipping</span> Deliveries</a></li>
+    </ul>
+</nav>
+
+<!-- Top bar -->
+<main class="flex-1 ml-0 md:ml-64 flex flex-col min-h-screen">
+    <header class="bg-surface fixed top-0 right-0 w-full md:w-[calc(100%-16rem)] h-16 border-b border-outline-variant flex justify-between items-center px-lg z-10">
+        <h2 class="font-bold text-lg text-primary">Arunella Admin</h2>
+        <div class="flex items-center gap-3">
+            <button class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container-highest transition-colors">
+                <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container-highest transition-colors">
+                <span class="material-symbols-outlined">settings</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <div class="pt-24 px-margin-mobile md:px-margin-desktop pb-margin-desktop w-full max-w-7xl mx-auto">
+
+        <div class="mb-lg">
+            <h2 class="text-headline-lg text-on-surface">Overview</h2>
+            <p class="text-body-md text-on-surface-variant mt-xs">Key metrics and recent operational activity.</p>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter mb-xl">
+            <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant flex flex-col gap-3">
+                <div class="flex justify-between items-start">
+                    <span class="text-label-md text-on-surface-variant">Total Farmers</span>
+                    <div class="p-2 bg-action-blue rounded-lg"><span class="material-symbols-outlined text-[20px]">group</span></div>
+                </div>
+                <div class="text-headline-lg text-on-surface" th:text="${farmerCount}">0</div>
+                <div class="text-label-sm text-leaf-green flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[14px]">trending_up</span> +12% this month
+                </div>
+            </div>
+            <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant flex flex-col gap-3">
+                <div class="flex justify-between items-start">
+                    <span class="text-label-md text-on-surface-variant">Total Orders</span>
+                    <div class="p-2 bg-user-tan rounded-lg"><span class="material-symbols-outlined text-[20px]">shopping_cart</span></div>
+                </div>
+                <div class="text-headline-lg text-on-surface" th:text="${orderCount}">0</div>
+                <div class="text-label-sm text-leaf-green flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[14px]">trending_up</span> +5.4% this month
+                </div>
+            </div>
+            <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant flex flex-col gap-3">
+                <div class="flex justify-between items-start">
+                    <span class="text-label-md text-on-surface-variant">Deliveries</span>
+                    <div class="p-2 bg-secondary-container rounded-lg"><span class="material-symbols-outlined text-[20px] text-on-secondary-container">local_shipping</span></div>
+                </div>
+                <div class="text-headline-lg text-on-surface" th:text="${deliveryCount}">0</div>
+                <div class="text-label-sm text-on-surface-variant flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[14px]">horizontal_rule</span> Stable this week
+                </div>
+            </div>
+            <div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant flex flex-col gap-3">
+                <div class="flex justify-between items-start">
+                    <span class="text-label-md text-on-surface-variant">Crop Listings</span>
+                    <div class="p-2 bg-primary-container rounded-lg"><span class="material-symbols-outlined text-[20px] text-on-primary-container">potted_plant</span></div>
+                </div>
+                <div class="text-headline-lg text-on-surface" th:text="${cropCount}">0</div>
+                <div class="text-label-sm text-leaf-green flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[14px]">trending_up</span> Active
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Crops Table + Activity Feed -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+            <!-- Table -->
+            <div class="lg:col-span-8 bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden">
+                <div class="flex justify-between items-center p-lg border-b border-outline-variant">
+                    <h3 class="text-headline-sm text-on-surface">Recent Crop Listings</h3>
+                    <a th:href="@{/crops}" class="text-primary text-label-md hover:underline">View All</a>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                        <tr class="bg-earth-gray border-b border-outline-variant">
+                            <th class="py-3 px-4 text-label-md text-on-surface">Product ID</th>
+                            <th class="py-3 px-4 text-label-md text-on-surface">Name</th>
+                            <th class="py-3 px-4 text-label-md text-on-surface">Qty</th>
+                            <th class="py-3 px-4 text-label-md text-on-surface">Price/KG</th>
+                            <th class="py-3 px-4 text-label-md text-on-surface">Status</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-body-md divide-y divide-outline-variant/50">
+                        <tr th:each="crop : ${recentCrops}" class="hover:bg-surface-container-low transition-colors">
+                            <td class="py-3 px-4 font-mono text-xs text-primary" th:text="'#CROP-' + ${crop.productId}">#CROP-1</td>
+                            <td class="py-3 px-4 font-semibold" th:text="${crop.productName}">Rice</td>
+                            <td class="py-3 px-4 text-on-surface-variant" th:text="${crop.stock != null ? crop.stock + ' kg' : '-'}">500 kg</td>
+                            <td class="py-3 px-4" th:text="${crop.pricePerKg != null ? 'LKR ' + crop.pricePerKg : '-'}">LKR 145</td>
+                            <td class="py-3 px-4">
+                                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container text-label-sm"
+                                      th:text="${crop.status != null ? crop.status : 'Active'}">Active</span>
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(recentCrops)}">
+                            <td colspan="5" class="py-8 text-center text-on-surface-variant text-body-md">No listings yet.</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Activity Feed -->
+            <div class="lg:col-span-4 bg-surface-container-lowest rounded-xl border border-outline-variant flex flex-col h-[420px]">
+                <div class="p-lg border-b border-outline-variant">
+                    <h3 class="text-headline-sm text-on-surface">Recent Activity</h3>
+                </div>
+                <ul class="flex-1 overflow-y-auto divide-y divide-outline-variant/50">
+                    <li class="p-md hover:bg-surface-container-high transition-colors">
+                        <div class="flex gap-3">
+                            <div class="w-9 h-9 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-on-secondary-container text-[18px]">inventory_2</span>
+                            </div>
+                            <div>
+                                <p class="text-body-md text-on-surface"><span class="font-semibold">New listing</span> by Farm Co. East</p>
+                                <div class="flex gap-2 mt-1">
+                                    <span class="px-2 py-0.5 rounded-full bg-user-tan text-on-surface text-label-sm">New Listing</span>
+                                    <span class="text-body-sm text-on-surface-variant">10 mins ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="p-md hover:bg-surface-container-high transition-colors">
+                        <div class="flex gap-3">
+                            <div class="w-9 h-9 rounded-full bg-action-blue flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-on-surface text-[18px]">local_shipping</span>
+                            </div>
+                            <div>
+                                <p class="text-body-md text-on-surface">Order <span class="font-semibold">#ORD-892</span> dispatched</p>
+                                <div class="flex gap-2 mt-1">
+                                    <span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant text-label-sm">Logistics</span>
+                                    <span class="text-body-sm text-on-surface-variant">45 mins ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="p-md hover:bg-surface-container-high transition-colors">
+                        <div class="flex gap-3">
+                            <div class="w-9 h-9 rounded-full bg-error-container flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-on-error-container text-[18px]">warning</span>
+                            </div>
+                            <div>
+                                <p class="text-body-md text-on-surface">Quality flag on <span class="font-semibold">Wheat Batch B4</span></p>
+                                <div class="flex gap-2 mt-1">
+                                    <span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container text-label-sm">Alert</span>
+                                    <span class="text-body-sm text-on-surface-variant">2 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="p-md hover:bg-surface-container-high transition-colors">
+                        <div class="flex gap-3">
+                            <div class="w-9 h-9 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-on-surface-variant text-[18px]">person_add</span>
+                            </div>
+                            <div>
+                                <p class="text-body-md text-on-surface">Farmer profile approved</p>
+                                <span class="text-body-sm text-on-surface-variant">3 hours ago</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
 </body>
 </html>
